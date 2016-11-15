@@ -30,10 +30,10 @@ class Attachment < ActiveRecord::Base
   end
 
   def to_default_image
-    default = "default-document.jpg"
+    default = "default-document.png"
     matches = Regexp.new(/\.(doc|pdf|ppt|xls)/).match(self.attachment_file_name)
     default = "default-#{matches[1]}.png" if matches
-    "/assets/ffcrm_attachments/#{default}"
+    "ffcrm_attachments/#{default}"
   end
 
   def is_image?
