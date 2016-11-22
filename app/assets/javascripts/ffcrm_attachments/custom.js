@@ -14,9 +14,9 @@ $(document).on("click", "#main form[class^=new_] input[type=submit], #main form[
   return false;
 });
 
-$(document).on('change', "#attach", function (){
-  var parent_div = $(this).closest(".attach_div");
-  var attach_limit = $(parent_div.closest('table')[0]).attr("attach_limit");
+$(document).on('change', '.attach', function (){
+  var parent_div = $(this).closest('.attach_div');
+  var attach_limit = $(parent_div.closest('ul')[0]).attr('attach_limit');
   var attach_limit_size = file_size_in_bytes(attach_limit);
   var file_type = this.files[0].type;
 
@@ -27,7 +27,7 @@ $(document).on('change', "#attach", function (){
     parent_div.find(".file_size").html('');
     parent_div.find(".remove_link").hide();
   } else {
-    var last_file_input = $("#entity_extra").find('input').last()[0].files;
+    var last_file_input = $("#entity_extra").find('input.attach').last()[0].files;
 
     // append file input
     append_file_input(last_file_input);
@@ -49,7 +49,7 @@ $(document).on('click', ".remove_link", function(){
   // new attachment
   var $this = $(this);
   current_file_div = $this.closest(".attach_div");
-  current_file_div.find("#attach").val('');
+  current_file_div.find('.attach').val('');
   current_file_div.hide();
 
   // old attachment
@@ -59,7 +59,7 @@ $(document).on('click', ".remove_link", function(){
 });
 
 function destroy_attachment(current_file_div, current_obj) {
-  edit_form = current_obj.closest('table').hasClass('edit_form');
+  edit_form = current_obj.closest('ul').hasClass('edit_form');
   old_attachment = current_obj.hasClass('display_remove');
 
   if(edit_form && old_attachment) {
@@ -114,7 +114,7 @@ function get_file_input(file_attr_name) {
 function append_file_input(last_file_input) {
   if(last_file_input.length > 0) {
     var input_length = $("#entity_extra").find('input:file').length;
-    var attr_name = $("input#attach").attr('name');
+    var attr_name = $('input.attach').attr('name');
     var set_attr_name = attr_name.replace("[0]", "["+input_length+"]");
     var next_attach_input = get_file_input(set_attr_name);
     $(".next_attachment").append(next_attach_input);
