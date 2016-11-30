@@ -21,10 +21,21 @@
 
 .attach_div {
   width: 90%;
+  vertical-align: middle; /* match to .section input. Should affect all elements in the div */
+}
+
+input.attach{
+  margin-top:0;
+}
+
+input.file-description {
+  margin-top: 0;
+  vertical-align: inherit;
 }
 
 .current_file_info {
   font-size: 13px;
+  vertical-align: inherit;
 }
 
 .file_size {
@@ -35,7 +46,6 @@
 .current_file_name {
   font-size: 13px;
   margin-left: 10px;
-  margin-top: 8px;
   width: 27%;
 }
 
@@ -44,6 +54,7 @@
   font-size: 13px;
   margin-left: 10px;
   margin-top: 8px;
+  vertical-align: inherit;
 }
 
 .display_remove {

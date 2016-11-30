@@ -40,6 +40,7 @@ $(document).on('change', '.attach', function (){
     var file_size = get_file_size(this.files[0]);
     parent_div.find(".file_size").html(file_size);
 
+    parent_div.find(".file-description").show();
     // display remove attachment link
     parent_div.find(".remove_link").show();
   }
