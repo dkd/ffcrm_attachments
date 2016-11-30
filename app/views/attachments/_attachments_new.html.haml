@@ -13,8 +13,8 @@
           - new_record = t.object.new_record?
           = t.file_field 'attachment', class: 'attach'
           %span.current_file_info
-            %span.current_file_name= t.object.try(:attachment_file_name)
             - unless new_record
+              %span.current_file_name= t.object.try(:attachment_file_name)
               %span -
               %i= t.object.try :description
               %span.file_size

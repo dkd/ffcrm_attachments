@@ -102,22 +102,25 @@ function file_size_in_bytes(limit_size) {
   return value;
 }
 
-function get_file_input(file_attr_name) {
-  file_name_div = "<div class='current_file_name'></div>";
-  file_size_div = "<div class='file_size'></div>";
-  remove_link_div = "<div class='remove_link'><a href='#'>Remove</a></div>";
-  file_input_div = "<input id='attach' name='"+file_attr_name+"' type='file'>";
-  complete_div = "<div class='attach_div'>" + file_input_div + file_name_div +
-    file_size_div + remove_link_div + "</div>";
-  return complete_div;
+function get_file_input(file_attr_name, descriptionName) {
+  var fileInfo = '<span class="current_file_info"> <span class="file_size"></span> </span>';
+  var remove_link_div = "<span class='remove_link'><a href='#'>Remove</a></span>";
+  var file_input_div = '<input class="attach" name="' + file_attr_name + '" type="file">';
+  var descriptionField = '<input type="text" class="file-description" placeholder="Description" style="display:none" name="'
+      + descriptionName
+      + '">';
+  return '<li class="attach_div">' + file_input_div + fileInfo + descriptionField + remove_link_div + '</li>';
 }
 
 function append_file_input(last_file_input) {
   if(last_file_input.length > 0) {
     var input_length = $("#entity_extra").find('input:file').length;
+    // get the correct parameters for attachment and its description and adapt it for multiple attachments
     var attr_name = $('input.attach').attr('name');
     var set_attr_name = attr_name.replace("[0]", "["+input_length+"]");
-    var next_attach_input = get_file_input(set_attr_name);
+    var descriptionName = $('input.file-description').prop('name');
+    var newDescriptionName = descriptionName.replace('[0]', "[" + input_length + "]");
+    var next_attach_input = get_file_input(set_attr_name, newDescriptionName);
     $(".next_attachment").append(next_attach_input);
   }
 }
