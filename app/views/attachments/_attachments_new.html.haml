@@ -7,19 +7,20 @@
 
 .section
   #entity_extra{ hidden_if(collapsed) }
-    %table{class: edit ? "edit_form" : "", 'attach_limit' => attach_limit_size }
-      %tr
-        %td
-          = f.simple_fields_for :attachments do |t|
-            .attach_div
-              - new_record = t.object.new_record?
+    %ul{class: edit ? 'edit_form' : '', 'attach_limit' => attach_limit_size }
+      = f.simple_fields_for :attachments do |t|
+        %li.attach_div
+          - new_record = t.object.new_record?
+          = t.file_field 'attachment', class: 'attach'
+          %span.current_file_info
+            - unless new_record
+              %span.current_file_name= t.object.try(:attachment_file_name)
+              %span -
+              %i= t.object.try :description
+              %span.file_size
+                = "(#{number_to_human_size(t.object.try(:attachment_file_size))})"
+            %span.file_size
+          = t.text_field :description, class: 'file-description', placeholder: t('description', default: 'Description').upcase, style: 'display: none;'
+          %span.remove_link{class: new_record ? '' : 'display_remove'}= link_to t('delete', default: 'remove'), '#', data: new_record ? {} : { confirm: 'Are you sure want to delete this attachment?' }
 
-              = t.file_field 'attachment', id: 'attach'
-
-              .current_file_name= t.object.try(:attachment_file_name)
-
-              .file_size= number_to_human_size(t.object.try(:attachment_file_size)) unless new_record
-
-              .remove_link{class: new_record ? "" : "display_remove"}= link_to 'Remove', '#', confirm: new_record ? false : "Are you sure want to delete this attachment?"
-
-          .next_attachment
+      .next_attachment
