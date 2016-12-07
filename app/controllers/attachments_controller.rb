@@ -1,4 +1,5 @@
 class AttachmentsController < ApplicationController
+  load_and_authorize_resource
 
   def download
     attach = Attachment.find(params[:id])
