@@ -4,12 +4,13 @@
   = subtitle :entity_attachments, collapsed, t(:extra_doc) + " (#{entity.attachments.count})"
   .attachments
     #entity_attachments{ hidden_if(collapsed) }
-      %table
-        %tr
-          %td
-            - if entity.attachments.present?
-              - entity.attachments.each do |attach|
-                .attach_block
-                  = link_to attachment_preview(attach), download_attachment_path(attach), {title: attach.attachment_file_name}
-                  .file_name= file_name(attach)
-                  .attachment-description= attach.description
+      - if entity.attachments.present?
+        %table.attachments
+          - entity.attachments.each do |attach|
+            %tr
+              %td.attachment-preview
+                = link_to attachment_preview(attach), download_attachment_path(attach), {title: attach.attachment_file_name}
+              %td.attachment-file-name
+                = attach.attachment_file_name.truncate(50)
+              %td.attachment-description
+                = attach.description

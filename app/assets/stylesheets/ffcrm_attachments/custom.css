@@ -10,11 +10,6 @@
   margin-top: 2%;
 }
 
-.attach_block {
-  display: inline-block;
-  margin-bottom: 2%;
-}
-
 .attach {
   list-style-type: none;
 }
@@ -61,10 +56,25 @@ input.file-description {
   display: inline;
 }
 
-.section #entity_extra table {
-  width: 100%;
-}
-
 .error {
   color: red;
+}
+
+/**
+ * Styles for the attachments list
+ */
+table.attachments {
+  width: 70%;
+}
+
+td.attachment-preview {
+  width: 10%;
+}
+
+td.attachment-file-name {
+  width: 30%;
+}
+
+td.attachment-description {
+  width: 60%;
 }
