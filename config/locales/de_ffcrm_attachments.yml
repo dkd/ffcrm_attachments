@@ -2,3 +2,5 @@
 de:
   extra_doc: Dokumente
   description: Beschreibung
+  invalid_file_type: Unerlaubter Dateityp
+  file_too_big: Datei ist zu groß.

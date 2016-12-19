@@ -21,10 +21,9 @@ $(document).on('change', '.attach', function (){
   var file_type = this.files[0].type;
 
   if((file_type == "") || (this.files[0].size > attach_limit_size)) {
-    error_msg = (file_type == "") ? "Invalid file type" : "File size is too long.";
-    parent_div.find('.current_file_name').addClass('error').html(error_msg);
+    var error_msg = (file_type == "") ? I18nForAttachments.invalid_file_type : I18nForAttachments.file_too_big;
+    parent_div.find('.current_file_info').addClass('error').html(error_msg);
     $(this).val('');
-    parent_div.find(".file_size").html('');
     parent_div.find(".remove_link").hide();
   } else {
     var last_file_input = $("#entity_extra").find('input.attach').last()[0].files;
