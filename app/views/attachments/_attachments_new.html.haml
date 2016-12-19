@@ -10,10 +10,11 @@
     %ul{class: edit ? 'edit_form' : '', 'attach_limit' => attach_limit_size }
       = f.simple_fields_for :attachments do |t|
         %li.attach_div
-          - new_record = t.object.new_record?
-          = t.file_field 'attachment', class: 'attach'
+          - old_record = !t.object.new_record?
+          -# file input field needs to exist to enable uploading of other attachments. But it is hidden to disable update acction
+          = t.file_field 'attachment', class: 'attach', style: ('display:none;' if old_record)
           %span.current_file_info
-            - unless new_record
+            - if old_record
               %span.current_file_name= t.object.try(:attachment_file_name)
               %span -
               %i= t.object.try :description
@@ -21,6 +22,6 @@
                 = "(#{number_to_human_size(t.object.try(:attachment_file_size))})"
             %span.file_size
           = t.text_field :description, class: 'file-description', placeholder: t('description', default: 'Description').upcase, style: 'display: none;'
-          %span.remove_link{class: new_record ? '' : 'display_remove'}= link_to t('delete', default: 'remove'), '#', data: new_record ? {} : { confirm: 'Are you sure want to delete this attachment?' }
+          %span.remove_link{class: old_record ? 'display_remove'  : ''}= link_to t('delete', default: 'remove'), '#', data: old_record ? { confirm: 'Are you sure want to delete this attachment?' } : {}
 
       .next_attachment
