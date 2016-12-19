@@ -104,9 +104,9 @@ function file_size_in_bytes(limit_size) {
 
 function get_file_input(file_attr_name, descriptionName) {
   var fileInfo = '<span class="current_file_info"> <span class="file_size"></span> </span>';
-  var remove_link_div = "<span class='remove_link'><a href='#'>Remove</a></span>";
+  var remove_link_div = "<span class='remove_link'><a href='#'>" + I18nForAttachments.delete + "</a></span>";
   var file_input_div = '<input class="attach" name="' + file_attr_name + '" type="file">';
-  var descriptionField = '<input type="text" class="file-description" placeholder="Description" style="display:none" name="'
+  var descriptionField = '<input type="text" class="file-description" placeholder="' + I18nForAttachments.description.toUpperCase() + '" style="display:none" name="'
       + descriptionName
       + '">';
   return '<li class="attach_div">' + file_input_div + fileInfo + descriptionField + remove_link_div + '</li>';

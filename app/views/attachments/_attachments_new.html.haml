@@ -1,3 +1,6 @@
+-# get Rails locales (copied from http://stackoverflow.com/a/10610347/1796645). Complicated Name to avoid possible conflicts with other gems
+:javascript
+  window.I18nForAttachments = #{(current_translations.to_json.html_safe)};
 - attach_limit_size = Setting.attachment_size || 2.megabytes
 - edit = !f.object.new_record?
 - collapsed = session[:entity_extra].nil?
@@ -22,6 +25,6 @@
                 = "(#{number_to_human_size(t.object.try(:attachment_file_size))})"
             %span.file_size
           = t.text_field :description, class: 'file-description', placeholder: t('description', default: 'Description').upcase, style: 'display: none;'
-          %span.remove_link{class: old_record ? 'display_remove'  : ''}= link_to t('delete', default: 'remove'), '#', data: old_record ? { confirm: 'Are you sure want to delete this attachment?' } : {}
+          %span.remove_link{class: old_record ? 'display_remove'  : ''}= link_to t('delete', default: 'Remove'), '#', data: old_record ? { confirm: 'Are you sure want to delete this attachment?' } : {}
 
       .next_attachment
