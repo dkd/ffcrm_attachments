@@ -21,10 +21,9 @@ $(document).on('change', '.attach', function (){
   var file_type = this.files[0].type;
 
   if((file_type == "") || (this.files[0].size > attach_limit_size)) {
-    error_msg = (file_type == "") ? "Invalid file type" : "File size is too long.";
-    parent_div.find('.current_file_name').addClass('error').html(error_msg);
+    var error_msg = (file_type == "") ? I18nForAttachments.invalid_file_type : I18nForAttachments.file_too_big;
+    parent_div.find('.current_file_info').addClass('error').html(error_msg);
     $(this).val('');
-    parent_div.find(".file_size").html('');
     parent_div.find(".remove_link").hide();
   } else {
     var last_file_input = $("#entity_extra").find('input.attach').last()[0].files;
@@ -104,9 +103,9 @@ function file_size_in_bytes(limit_size) {
 
 function get_file_input(file_attr_name, descriptionName) {
   var fileInfo = '<span class="current_file_info"> <span class="file_size"></span> </span>';
-  var remove_link_div = "<span class='remove_link'><a href='#'>Remove</a></span>";
+  var remove_link_div = "<span class='remove_link'><a href='#'>" + I18nForAttachments.delete + "</a></span>";
   var file_input_div = '<input class="attach" name="' + file_attr_name + '" type="file">';
-  var descriptionField = '<input type="text" class="file-description" placeholder="Description" style="display:none" name="'
+  var descriptionField = '<input type="text" class="file-description" placeholder="' + I18nForAttachments.description.toUpperCase() + '" style="display:none" name="'
       + descriptionName
       + '">';
   return '<li class="attach_div">' + file_input_div + fileInfo + descriptionField + remove_link_div + '</li>';
